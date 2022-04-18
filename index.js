@@ -1,7 +1,8 @@
-// Создание стрелочной функции с указанием входного массива
+// Task1
 
+// Тестовый массив
 arrayForTest = ['test1','test2']
-
+// Создание стрелочной функции с указанием входного массива 
 const copyArray = (arrayForTest) => {
     resultArray = Array.from(arrayForTest)
     return resultArray
@@ -20,6 +21,7 @@ const equalArrays = (firstArray,secondArray) => {
 }
 
 // Тест №1: Сравнение ссылок и значений массива
+// Можно сделать через mocha для Node.js, но я решил сделать по - народному - в лоб
 const testCopyArray = (resultArray,testArray) => {
     if (equalArrays(resultArray,testArray) && resultArray != testArray) return true
     // Если указатели не равны, то новый массив не являются ссылкой на предыдущий
@@ -28,3 +30,29 @@ const testCopyArray = (resultArray,testArray) => {
 
 
 console.log(testCopyArray(copyArray(arrayForTest),arrayForTest))
+
+
+
+
+// Task 2
+
+const arrayMultiplication = (firstPosArray, secondPosArray) => {
+    // Создание результирующего списка и заполнение нулями
+    var resArray = new Array(firstPosArray.length + secondPosArray.length - 1) 
+    resArray.fill(0)
+    // Проходимся циклом по каждому из списков и ищем конечный результат
+    for (var i = 0; i < firstPosArray.length; i++)
+        for (var j = 0; j < secondPosArray.length; j++)
+            resArray[i + j] += firstPosArray[i] * secondPosArray[j]
+    return resArray
+}
+
+
+// Тест №1: True -> тест пройден. 
+console.log(equalArrays(arrayMultiplication([-1, 1], [2, 1]),[-2,1,1]) ? "Тест пройден успешно" : "Тест не пройден" ) 
+
+// Тест №2. Матрицы разных размерностей: 4 на 2
+console.log(equalArrays(arrayMultiplication([-9, 7, 1, 5], [1, 1]),[-9, -2, 8, 6, 5]) ? "Тест пройден успешно" : "Тест не пройден" ) 
+
+// Тест №3. Матрицы разных размерностей: 4 на 3
+console.log(equalArrays(arrayMultiplication([14, 0, 5, -1], [7, 2, 8]),[98, 28, 147, 3, 38, -8]) ? "Тест пройден успешно" : "Тест не пройден" ) 
